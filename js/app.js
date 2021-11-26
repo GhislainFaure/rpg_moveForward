@@ -1,4 +1,4 @@
-var app = {
+const app = {
     // le div qui contient mon plateau
     boardDiv: document.getElementById('board'),
     player: {
@@ -12,9 +12,9 @@ var app = {
     },
     drawBoard: function () {
         // de 0 a 4...
-        for (var y = 0; y < 4; y++) {
+        for (let y = 0; y < 4; y++) {
             // je crée un div
-            var row = document.createElement('div');
+            const row = document.createElement('div');
 
             // je lui met la classe "row"
             row.classList.add('row');
@@ -22,9 +22,9 @@ var app = {
             // on l'insère dans le div "boardDiv" que j'ai stocké dans une propriété de mon objet
             app.boardDiv.appendChild(row);
 
-            for (var x = 0; x < 6; x++) {
+            for (let x = 0; x < 6; x++) {
                 // maintenant, dans cette row, on crée N cellules
-                var cell = document.createElement('div');
+                const cell = document.createElement('div');
 
                 // je met la classe sur la cellule
                 cell.classList.add('cell');
