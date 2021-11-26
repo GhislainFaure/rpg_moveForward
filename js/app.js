@@ -23,6 +23,9 @@ const app = {
         else if (app.player.direction === 'left') {
             app.player.direction = 'down';
         }
+
+        // on a tourné le joueur ? ok, on redessine
+        app.redrawBoard();
     },
     turnRight: () => {
         if (app.player.direction === 'up') {
@@ -37,6 +40,37 @@ const app = {
         else if (app.player.direction === 'left') {
             app.player.direction = 'up';
         }
+
+        // on a tourné le joueur ? ok, on redessine
+        app.redrawBoard();
+    },
+    moveForward: () => {
+        // faire avancer le joueur, ok, mais ca va dépendre de sa direction !
+        // si je suis tourné vers le haut
+        // je vérifie que je ne suis pas déja au bord
+        // c'est a dire que y vaut plus de 0
+        if (app.player.direction === 'up' && app.player.y > 0) {
+            // j'enleve 1 a mon Y
+            app.player.y = app.player.y - 1;
+        }
+        // si je suis tourné vers la droite
+        // je vérifie que je ne suis pas déja au bord
+        // c'est a dire que x vaut moins de 5
+        else if (app.player.direction === 'right' && app.player.x < 5) {
+            // j'ajoute 1 a mon X
+            app.player.x = app.player.x + 1;
+        }
+        else if (app.player.direction === 'down' && app.player.y < 3) {
+            // j'ajoute 1 a mon Y
+            app.player.y = app.player.y + 1;
+        }
+        else if (app.player.direction === 'left' && app.player.x > 0) {
+            // j'enleve 1 a mon X
+            app.player.x = app.player.x - 1;
+        }
+
+        // pareil, on redessine
+        app.redrawBoard();
     },
     drawBoard: () => {
         // de 0 a 4...
