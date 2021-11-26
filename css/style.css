@@ -15,6 +15,22 @@ body {
   margin: 20px;
 }
 
+.player--up {
+  transform: rotate(-90deg);
+}
+
+.player--right {
+  transform: none;
+}
+
+.player--down {
+  transform: rotate(90deg);
+}
+
+.player--left {
+  transform: rotate(-180deg);
+}
+
 .row {
   display: flex;
 }

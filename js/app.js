@@ -10,7 +10,35 @@ const app = {
         x: 5,
         y: 3
     },
-    drawBoard: function () {
+    turnLeft: () => {
+        if (app.player.direction === 'up') {
+            app.player.direction = 'left';
+        }
+        else if (app.player.direction === 'right') {
+            app.player.direction = 'up';
+        }
+        else if (app.player.direction === 'down') {
+            app.player.direction = 'right';
+        }
+        else if (app.player.direction === 'left') {
+            app.player.direction = 'down';
+        }
+    },
+    turnRight: () => {
+        if (app.player.direction === 'up') {
+            app.player.direction = 'right';
+        }
+        else if (app.player.direction === 'right') {
+            app.player.direction = 'down';
+        }
+        else if (app.player.direction === 'down') {
+            app.player.direction = 'left';
+        }
+        else if (app.player.direction === 'left') {
+            app.player.direction = 'up';
+        }
+    },
+    drawBoard: () => {
         // de 0 a 4...
         for (let y = 0; y < 4; y++) {
             // je crée un div
@@ -39,10 +67,18 @@ const app = {
                 if (x === app.player.x && y === app.player.y) {
                     // si le joueur est dedans
                     // alors on crée un div
-                    var playerDiv = document.createElement('div');
+                    const playerDiv = document.createElement('div');
                     // on lui met la classe player
                     playerDiv.classList.add('player');
                     // et on l'insère dans la cellule
+
+                    // lorsque on dessine le joueur, il faudrait le tourner dans le  bon sens
+                    // j'ai déja préparé 4 classes : player--up, player--down, etc
+                    // je n'ai plus qu'a construire le nom de cette classe depuis
+                    // la propriété direction : `player--${app.player.direction}`
+                    // et j'ajoute cette classe au joueur
+                    playerDiv.classList.add(`player--${app.player.direction}`);
+
                     cell.appendChild(playerDiv);
                 }
 
@@ -51,7 +87,16 @@ const app = {
             }
         }
     },
-    init: function () {
+    // vide le contenu de la div qui a l'id "board"
+    clearBoard: () => {
+        app.boardDiv.innerHTML = '';
+    },
+    redrawBoard: function() {
+        app.clearBoard();
+
+        app.drawBoard();
+    },
+    init: () => {
         console.log('init !');
 
         app.drawBoard();
