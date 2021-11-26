@@ -125,14 +125,26 @@ const app = {
     clearBoard: () => {
         app.boardDiv.innerHTML = '';
     },
-    redrawBoard: function() {
+    redrawBoard: () => {
         app.clearBoard();
 
         app.drawBoard();
     },
+    listenKeyboardEvents: () => {
+        document.addEventListener('keyup', (event) => {
+            if (event.key === 'ArrowLeft') {
+                app.turnLeft();
+            }
+            else if (event.key === 'ArrowRight') {
+                app.turnRight();
+            }
+            else if (event.key === 'ArrowUp') {
+                app.moveForward();
+            }
+        });
+    },
     init: () => {
-        console.log('init !');
-
+        app.listenKeyboardEvents();
         app.drawBoard();
     }
 };
