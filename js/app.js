@@ -12,7 +12,7 @@ var app = {
     },
     drawBoard: function () {
         // de 0 a 4...
-        for (var rowIndex = 0; rowIndex < 4; rowIndex++) {
+        for (var y = 0; y < 4; y++) {
             // je crée un div
             var row = document.createElement('div');
 
@@ -22,12 +22,29 @@ var app = {
             // on l'insère dans le div "boardDiv" que j'ai stocké dans une propriété de mon objet
             app.boardDiv.appendChild(row);
 
-            for (var cellIndex = 0; cellIndex < 6; cellIndex++) {
+            for (var x = 0; x < 6; x++) {
                 // maintenant, dans cette row, on crée N cellules
                 var cell = document.createElement('div');
 
                 // je met la classe sur la cellule
                 cell.classList.add('cell');
+
+                // regardons si la cellule que l'on est en train de dessiner,
+                // correspond a la case d'arrivée
+                if (x === app.targetCell.x && y === app.targetCell.y) {
+                    // si c'est la case d'arrivée, on lui rajoute la classe "targetCell"
+                    cell.classList.add('targetCell');
+                }
+                // est ce que le joueur est sur la case que l'on dessine
+                if (x === app.player.x && y === app.player.y) {
+                    // si le joueur est dedans
+                    // alors on crée un div
+                    var playerDiv = document.createElement('div');
+                    // on lui met la classe player
+                    playerDiv.classList.add('player');
+                    // et on l'insère dans la cellule
+                    cell.appendChild(playerDiv);
+                }
 
                 // j'insère la cellule dans la ligne (row)
                 row.appendChild(cell);
