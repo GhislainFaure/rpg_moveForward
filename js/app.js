@@ -1,16 +1,49 @@
 const app = {
     // le div qui contient mon plateau
     boardDiv: document.getElementById('board'),
+    // la position et la direction du joueur
     player: {
         x: 0,
         y: 0,
         direction: 'right'
     },
+    // la cible a atteindre
     targetCell: {
         x: 5,
         y: 3
     },
+    // une variable qui contient notre nombre de déplacements
+    numberOfMoves: 0,
+    // un boolen gameOver pour savoir si la partie est terminée
+    gameOver: false,
+    // une méthode pour savoir si on a gagné
+    isGameOver: () => {
+        // on a gagné, si le joueur est bien sur les coordonées de targetCell
+        if (app.player.x === app.targetCell.x && app.player.y === app.targetCell.y) {
+            // ok, le joueur est sur la case d'arrivée
+
+            // on le prévient, mais dans 100ms, le temps que la grille se redessine
+            // parce que sinon alert "arrête" le Javascript
+            setTimeout(() => {
+                alert(`Gagné en ${app.numberOfMoves} coups`);
+            }, 100);
+
+            // et on met gameOver a true pour "bloquer" le jeu
+            app.gameOver = true;
+        }
+    },
     turnLeft: () => {
+        // si la partie est finie
+        if (app.gameOver) {
+            // je fais rien. 
+            // donc je return
+            // ce qui me permet de SORTIR de la fonction
+            // et donc... de ne pas exécuter ce qui suit
+            return;
+        }
+        // on augmente notre nombre de déplacements de 1
+        app.numberOfMoves = app.numberOfMoves + 1;
+
         if (app.player.direction === 'up') {
             app.player.direction = 'left';
         }
@@ -28,6 +61,14 @@ const app = {
         app.redrawBoard();
     },
     turnRight: () => {
+        // meme chose qu'au dessus
+        if (app.gameOver) {
+            return;
+        }
+
+        // on augmente notre nombre de déplacements de 1
+        app.numberOfMoves = app.numberOfMoves + 1;
+
         if (app.player.direction === 'up') {
             app.player.direction = 'right';
         }
@@ -45,6 +86,13 @@ const app = {
         app.redrawBoard();
     },
     moveForward: () => {
+        // meme chose qu'au dessus
+        if (app.gameOver) {
+            return;
+        }
+        // on augmente notre nombre de déplacements de 1
+        app.numberOfMoves = app.numberOfMoves + 1;
+        
         // faire avancer le joueur, ok, mais ca va dépendre de sa direction !
         // si je suis tourné vers le haut
         // je vérifie que je ne suis pas déja au bord
@@ -120,6 +168,9 @@ const app = {
                 row.appendChild(cell);
             }
         }
+
+        // ok la grille est dessinée, on regarde si le joueur a gagné
+        app.isGameOver();
     },
     // vide le contenu de la div qui a l'id "board"
     clearBoard: () => {
