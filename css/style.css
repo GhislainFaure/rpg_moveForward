@@ -1,11 +1,61 @@
 body {
-  background: #ddd;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+
+}
+.rpg__header {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  color: rgba(7, 58, 7, 0.473);
+  height: 100%;
+  width: 70%;
+  background: linear-gradient(#49a571, #04050f);
+  
+}
+.rpg__header__title {
+  font-size: 4rem;
+  font-weight: bold;
+  color: white;
+  opacity: 0.4;
+ 
+
+}
+.container__board {
+  background: linear-gradient(#49a571, #04050f);
+  height: 100%;
+  width: 70%;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  
+ 
+ 
+}
+#board {
+display: inline-block;
+border: 5px solid black;
+box-shadow: 4px 3px 6px rgb(7, 22, 2);
+
 }
 
+.row {
+  display: flex;
+}
+.cell {
+  width: 80px;
+  height: 80px;
+  background-color: white;
+  border: 1px solid rgb(0, 0, 0);
+}
+.target {
+  background-color: rgba(68, 233, 96, 0.473);
+  
+  
+}
 .player {
   background-image: url('../img/sprite.png');
   width: 28px;
@@ -30,19 +80,4 @@ body {
 
 .player--left {
   background-position-y: -32px;
-}
-
-.row {
-  display: flex;
-}
-
-.cell {
-  width: 70px;
-  height: 70px;
-  border: 1px solid black;
-  background-color: white;
-}
-
-.targetCell {
-  background-color: green;
 }
